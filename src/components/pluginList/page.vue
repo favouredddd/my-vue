@@ -71,10 +71,12 @@
 </template>
 <script>
 import page1 from '@/components/pluginlist/page/page1.vue'
+import page2 from '@/components/pluginlist/page/page2.vue'
 export default {
   name: "page",
   components:{
-    page1
+    page1,
+      page2
   },
   data(){
     return {name:'分页插件'}

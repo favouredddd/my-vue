@@ -5,7 +5,7 @@
     <div class='plugin-item'>
       <div class="plugin-content el-plugin-10001">
         <div class="plugin-page">
-          <page1 />
+          <page2 />
         </div>
       </div>
       <br>

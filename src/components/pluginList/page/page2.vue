@@ -2,13 +2,13 @@
   <div class="plugin-page">
     <div>
       <div class="nd-plugin-paging">
-        <span>共<span class="red total" ">{{all}}</span>条记录</span>
-        <span>共<span class="red allpage" ">{{page}}</span>页</span>
-        <span>当前第<span class="red page" ">{{now}}</span>页</span>
-        <div class="to-first" :class="{'can-not':now!==1}">首页</div>
-        <div class="to-prev "  :class="{'can-not':now!==page}">上一页</div>
-        <div class="to-next">下一页</div>
-        <div class="to-last">末页</div>
+        <span>共<span class="red total" >{{all}}</span>条记录</span>
+        <span>共<span class="red allpage" >{{page}}</span>页</span>
+        <span>当前第<span class="red page" >{{now}}</span>页</span>
+        <div class="to-first" :class="{'can-not':now!==1}" @click="goStart">首页</div>
+        <div class="to-prev "  :class="{'can-not':now!==page}" @click="goPre">上一页</div>
+        <div class="to-next" @click="goNext">下一页</div>
+        <div class="to-last" @click="goEnd">末页</div>
         <span>转到:</span>
         <input type="number">
         <div class="go-to">GO</div>
@@ -28,11 +28,32 @@ export default {
     }
   },
   methods: {
+    goStart(){
+      let me=this;
+      if(me.now!==1)
+          me.now=1;
+        return ;
+    },
+    goNext(){
+            let me=this;
+      if(me.now!==me.row)
+         me.now+=1;
+    },
+    goPre(){
+            let me=this;
+      if(me.now!==1){
+         me.now-=1;
+      }
+    },
+    goEnd(){
+            let me=this;
+      if(me.now!==me.row){
+        me.now=me.row
+      }
+    }
   },
   mounted() {
     let me = this;
-    me.getPage();
-    me.pages[0].check = true;
   }
 }
 
@@ -50,6 +71,7 @@ export default {
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 12px;
+  width: 700px;
 }
 
 .nd-plugin-paging div {

@@ -12,6 +12,8 @@ import imgSHow from '@/components/pluginlist/magn'
 import instruction from '@/components/pluginlist/instruction'
 import inputAuto from '@/components/pluginlist/autoComplete.vue'
 import page from '@/components/pluginlist/page.vue'
+import buffer from '@/components/pluginlist/buffer.vue'
+import upload from '@/components/pluginlist/upload.vue'
 Vue.use(Router);
 export default new Router({
   mode: 'history',
@@ -36,7 +38,9 @@ export default new Router({
             { path: 'magn', component: magn },
             { path: 'imgShow', component: imgSHow },
             { path: "inputAuto", component: inputAuto },
-            { path: "paging", component: page }
+            { path: "paging", component: page },
+            { path: "buffering", component: buffer },
+            { path: "upload", component: upload }
           ]
         }
       ]

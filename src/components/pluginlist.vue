@@ -29,8 +29,8 @@ export default {
         path: "/vue/pluginList/instruction",
         active: true
       }, {
-        name: "图表",
-        path: "/vue/pluginList/chart",
+        name: "上传文件",
+        path: "/vue/pluginList/upload",
         active: false
       }, {
         name: "缓冲动画",

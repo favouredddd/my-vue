@@ -1,131 +1,91 @@
 <template>
-    <div class="el-magn">
-      <div class="left">
-        <img :src="src1" >
-        <div class="small" :style="{left:ls+'px',top:lt+'px',backgroundColor:color,opacity:opacity}"></div>
-        <div class="event" @mousemove="move"></div>
+  <div class="plugin-type el-plugin-type">
+    <div class="plugin-name">{{name}}插件</div>
+    <div class='plugin-item'>
+      <div class="plugin-content el-plugin-08001">
+        <div class="el-plugin" style="overflow: auto">
+          <magn1 />
+        </div>
       </div>
-      <div class="right">
-        <img :src="src2" :style="{left:left+'px',top:top+'px'}">
-      </div>
-      <div class="clear" style="clear:both"></div>
-      <div>
-        <input type="color" v-model="color">
+      <br>
+      <div class="instruction-title-sec">HTML代码</div>
+      <br><pre class="instruction-code">
+                                        <pre><<span class="element">div</span> <span class="attr">class</span>="plugin-photo-to-big" <span class="attr">x-plugin</span>="photo_to_big" <span class="attr">dataName</span>="photo_to_big_data"><<span class="element">/div></span></pre>
+      </pre><br>
+      <div class="instruction-title-sec">JS代码</div>
+      <br><pre class="instruction-code">
+                                    <pre><span>{</span></pre>
+      <pre><span>      name: 'photo_to_big',</span>      <span class="comment">/*插件模块的模块名称*/</span></pre>
+      <pre><span>      el: '.plugin-photo-to-big',</span>      <span class="comment">/*插件渲染容器*/</span></pre>
+      <pre><span>      data: {</span>      <span class="comment">/*配置参数项*/</span></pre>
+      <pre><span>            photo_to_big_data: {</span>      <span class="comment">/*插件绑定的容器中，绑定的数据对象的名称*/</span></pre>
+      <pre><span>                  small_img: '*****',</span>      <span class="comment">/*图片放大镜插件小图片路径*/</span></pre>
+      <pre><span>                  big_img: '*****',</span>      <span class="comment">/*图片放大镜插件大图片路径*/</span></pre>
+      <pre><span>                  radio: '2',</span>      <span class="comment">/*图片放大镜放大比例*/</span></pre>
+      <pre><span>                  mark_color: '#666666',</span>      <span class="comment">/*图片放大镜遮罩层颜色*/</span></pre>
+      <pre><span>                  mark_opacity: 0.2,</span>      <span class="comment">/*图片放大镜遮罩层透明度*/</span></pre>
+      <pre><span>            }</span></pre>
+      <pre><span>     }</span></pre>
+      <pre><span>}</span></pre>
+      </pre><br>
+      <div class='plugin-explain'>
+        <p class="instruction-title-sec">插件说明:</p>
+        <br>
+        <p class='explain'>这是一款图片放大镜插件。可以一定程度上放大鼠标选中的区域。本插件可自定义配置项包括：放大比例、颜色、透明度、图片路径。在使用时，需定义图片标签的父元素标签的大小（width,height）。</p>
       </div>
     </div>
+    <div class='plugin-item'>
+      <div class="plugin-content el-plugin-08002" style="display: block!important">
+                 <magn1 />
+      </div>
+      <br>
+      <div class="instruction-title-sec">HTML代码</div>
+      <br><pre class="instruction-code">
+                                        <pre><<span class="element">div</span> <span class="attr">class</span>="plugin-photo-to-big" <span class="attr">x-plugin</span>="photo_to_big" <span class="attr">dataName</span>="photo_to_big_data"><<span class="element">/div></span></pre>
+      </pre><br>
+      <div class="instruction-title-sec">JS代码</div>
+      <br><pre class="instruction-code">
+                                    <pre><span>{</span></pre>
+      <pre><span>      name: 'photo_to_big',</span>      <span class="comment">/*插件模块的模块名称*/</span></pre>
+      <pre><span>      el: '.plugin-photo-to-big',</span>      <span class="comment">/*插件渲染容器*/</span></pre>
+      <pre><span>      data: {</span>      <span class="comment">/*配置参数项*/</span></pre>
+      <pre><span>            photo_to_big_data: {</span>      <span class="comment">/*插件绑定的容器中，绑定的数据对象的名称*/</span></pre>
+      <pre><span>                  small_img: '*****',</span>      <span class="comment">/*图片放大镜插件小图片路径*/</span></pre>
+      <pre><span>                  imgs: '*****',</span>      <span class="comment">/*图片切换数组*/</span></pre>
+      <pre><span>                   big_img: '*****',</span>      <span class="comment">/*图片放大镜插件大图片路径*/</span></pre>
+      <pre><span>                  radio: '2',</span>      <span class="comment">/*图片放大镜放大比例*/</span></pre>
+      <pre><span>                  mark_color: '#666666',</span>      <span class="comment">/*图片放大镜遮罩层颜色*/</span></pre>
+      <pre><span>                  mark_opacity: 0.2,</span>      <span class="comment">/*图片放大镜遮罩层透明度*/</span></pre>
+      <pre><span>            }</span></pre>
+      <pre><span>     }</span></pre>
+      <pre><span>}</span></pre>
+      </pre><br>
+      <div class='plugin-explain'>
+        <p class="instruction-title-sec">插件说明:</p>
+        <br>
+        <p class='explain'>这是一款图片放大镜插件。可以一定程度上放大鼠标选中的区域。本插件可自定义配置项包括：放大比例、颜色、透明度、图片路径。在使用时，需定义图片标签的父元素标签的大小（width,height）。</p>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
-  var src1=require("../../assets/small.jpg");
-  var src2=require("../../assets/big.jpg");
-  export default {
-    name:"magn",
-    data(){
-      return {
-        left:0,
-        top:0,
-        ls:0,
-        lt:0,
-        src1:src1,
-        src2:src2,
-        per:2,
-        color:'#00ff00',
-        opacity:0.2,
-      };
-    },
-    methods:{
-      move(e){
-        var me=this;
-        me.getX(e.offsetX);
-        me.getY(e.offsetY);
-        me.setImg();
-      },
-      getX(x){
-        var me=this;
-        if(x<me.width/me.per/2){
-          me.ls=0;
-          return ;
-        }
-        if(x>me.width-(me.width/me.per/2)){
-          me.ls=me.width-(me.width/me.per);
-          return ;
-        }
-        me.ls=x-me.width/me.per/2;
-      },
-      getY(y){
-        var me=this;
-        if(y<me.height/me.per/2){
-          me.lt=0;
-          return ;
-        }
-        if(y>me.height-(me.height/me.per/2)){
-          me.lt=me.height-(me.height/me.per);
-          return ;
-        }
-        me.lt=y-me.height/me.per/2;
-      },
-      setImg(){
-        var me=this;
-        me.left=-1*me.ls*me.per;
-        me.top=-1*me.lt*me.per
-      }
-    },
-    computed:{
-      width(){
-        return   this.$store.state.fontSize*10;
-      },
-      height(){
-        return this.$store.state.fontSize*10;
-      }
-    }
+  import magn1 from '@/components/pluginlist/magn/magn1.vue'
+export default {
+  name: "magn",
+  components:{
+    magn1,
+  },
+  data() {
+    return {
+      name:"magn"
+    };
+  },
+  methods: {
+  },
+  computed: {
   }
-</script>
-<style>
-.el-magn {
-  width: 20rem;
-  height: 10rem;
-  margin: 0 auto;
-  margin-top: 1rem;
-}
-.el-magn>div{
-  overflow: hidden;
-}
-.el-magn .left {
-  width: 50%;
-  height: 100%;
-  float: left;
-  position: relative;
 }
 
-.el-magn .right{
-  position: relative;
-  width: 50%;
-  height: 100%;
-  float: left;
-}
-.el-magn .left>*{
-  position: absolute;
-}
-.el-magn .left>img{
-  width: 100%;
-  height: 100%;
-  top:0;
-  left:0;
-}
-.el-magn .left .small{
-  width:50%;
-  height: 50%;
-  z-index: 99;
-}
-.el-magn .left .event{
-  z-index: 100;
-  width: 100%;
-  height: 100%;
-  top:0;
-  left:0;
-}
-.el-magn .right>img{
-  position: absolute;
-  width:200%;
-  height: 200%;
-}
+</script>
+<style>
 </style>

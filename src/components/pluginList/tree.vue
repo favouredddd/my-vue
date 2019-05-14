@@ -4,9 +4,7 @@
     <p class="explain">本章节主要展示插件库中的相关图表插件。</p>
     <div class='plugin-item'>
         <div class="plugin-content el-plugin-14001">
-            <div class="el-tree">
                <tree1 /> 
-            </div>
         </div>
         <br>
         <div class="instruction-title-sec">HTML代码</div>

@@ -183,7 +183,7 @@ class Ajax {
   }
 }
 export default {
-  name: "uplaodImage1",
+  name: "uplaodImage2",
   data() {
     return {
       opacity: 1,
@@ -205,19 +205,15 @@ export default {
     upload() {
       let me = this;
       if (!me.imgs.length) return
-      Ajax.init({
-        progress: function(e) {
-          let per = e.loaded / e.total
-          me.width = window.innerWidth * per
-          me.opacity = 1
-        },
-        type: 'post',
-        params: me.imgs,
-        url: 'https://nodom.store/api/upload',
-        callback() {
-          alert("success");
-        }
-      })
+      Ajax.postAll({
+            progress: function(e) {},
+            type: 'post',
+            params: me.imgs,
+            url: 'https://nodom.store/api/getChipe',
+            callback() {
+              alert(111)
+            }
+          })
     },
     deal(files) {
       files = files.target.files;

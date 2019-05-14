@@ -41,14 +41,22 @@ export default {
         path: "/vue/pluginList/carousel",
         active: false
       }, {
-        name: "放大镜",
-        path: "/vue/pluginList/magn",
-        active: false
-      }, {
         name: "分页",
         path: "/vue/pluginList/paging",
         active: false
       }, {
+        name: "菜单树",
+        path: "/vue/pluginList/tree",
+        active: false
+      },{
+        name: "图片放大",
+        path: "/vue/pluginList/imgShow",
+        active: false
+      },{
+        name: "自动补全",
+        path: "/vue/pluginList/inputAuto",
+        active: false
+      },{
         name: "选择框",
         path: "/vue/pluginList/checkBox",
         active: false
@@ -61,14 +69,6 @@ export default {
         path: "/vue/pluginList/foldCollapse",
         active: false
       }, {
-        name: "图片放大",
-        path: "/vue/pluginList/imgShow",
-        active: false
-      }, {
-        name: "自动补全",
-        path: "/vue/pluginList/inputAuto",
-        active: false
-      }, {
         name: "进度条",
         path: "/vue/pluginList/progress",
         active: false
@@ -79,10 +79,6 @@ export default {
       }, {
         name: "地址",
         path: "/vue/pluginList/address",
-        active: false
-      }, {
-        name: "菜单树",
-        path: "/vue/pluginList/tree",
         active: false
       }],
     }

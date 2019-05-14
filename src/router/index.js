@@ -23,24 +23,24 @@ export default new Router({
       path: '/vue',
       redirect: '/vue/home',
       meta: { index: 0 },
-      component: App,
+      component:()=>import('@/components/App'),
       children: [
-        { path: 'home', component: Home },
-        { path: 'pluginDown', component: pluginDown },
+        { path: 'home', component:()=>import('@/components/Home')},
+        { path: 'pluginDown',component:()=>import('@/components/plugindown')},
         {
           path: 'pluginList',
-          component: pluginList,
+          component:()=>import('@/components/pluginlist'),
           redirect: "/vue/pluginList/instruction",
           children: [
-            { path: 'instruction', component: instruction },
-            { path: 'tree', component: tree },
-            { path: 'carousel', component: carousel },
-            { path: 'magn', component: magn },
-            { path: 'imgShow', component: imgSHow },
-            { path: "inputAuto", component: inputAuto },
-            { path: "paging", component: page },
-            { path: "buffering", component: buffer },
-            { path: "upload", component: upload }
+            { path: 'instruction', component:()=>import('@/components/pluginlist/instruction') },
+            { path: 'tree', component:()=>import('@/components/pluginlist/tree') },
+            { path: 'carousel',component:()=>import('@/components/pluginlist/carousel') },
+            { path: 'magn', component:()=>import('@/components/pluginlist/magn') },
+            { path: 'imgShow', component:()=>import('@/components/pluginlist/magn')  },
+            { path: "inputAuto", component:()=>import('@/components/pluginlist/autoComplete') },
+            { path: "paging", component:()=> import('@/components/pluginlist/page') },
+            { path: "buffering", component:()=> import('@/components/pluginlist/buffer')},
+            { path: "upload", component: ()=> import('@/components/pluginlist/upload')}
           ]
         }
       ]

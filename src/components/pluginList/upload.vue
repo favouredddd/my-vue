@@ -16,7 +16,7 @@
     <div class='plugin-item'>
         <div class="plugin-content el-plugin-20003">
            <div class="content">
-            <upload1/>
+            <upload2/>
         </div>
         </div>
         <div class='plugin-explain'>
@@ -28,13 +28,15 @@
 </template>
 <script>
 import upload1 from '@/components/pluginlist/upload/upload1.vue'
+import upload2 from '@/components/pluginlist/upload/upload2.vue'
 export default {
   name: "upload",
  data() {
  	return{name:"文件上传",uploads:''}
   },
   components:{
-  	upload1
+  	upload1,
+  	 	upload2
   }
 }
 </script>

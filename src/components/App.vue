@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div v-swiper:left="left">
       <div class="con-header">
         <img class="logo" :src="img" @click="showLogin">
         <ul>
@@ -16,73 +16,81 @@
       </div>
     </div>
     <div style="width:100%;overflow-x: hidden;position: relative;">
-      <transition name="fade" mode="in-out">
+      <transition :name="fade" :mode="mode">
         <router-view></router-view>
       </transition>
     </div>
-    <div class="el-show-login" v-show="login">
-    <div class="contentss" style="position: static">
-        <div class="wrap">
+    <transition name="move" mode="out-in">
+      <div class="el-show-login" v-show="login" style="height:100%">
+        <div class="contentss" style="position: static;transition:none">
+          <div class="wrap">
             <div class="header">
               <span class="text">管理员</span>
               <div class="delete" @click="noShow"></div>
             </div>
             <div class="item">
-                <div class="span">账户</div>
-                <input class="word" v-model="key"/>
-                <div class="clear"></div>
+              <div class="span">账户</div>
+              <input class="word" v-model="key" />
+              <div class="clear"></div>
             </div>
             <div class="item">
-                <div class="span">密码</div>
-                <input class="word" v-model="values" type="password"/>
-                <div class="clear"></div>
+              <div class="span">密码</div>
+              <input class="word" v-model="values" type="password" />
+              <div class="clear"></div>
             </div>
             <div class="item">
               <div class="ensure" @click="ensure">确认</div>
             </div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
-  import ajax from './util/http.js';
+  import Vue from 'Vue'
+import ajax from './util/http.js';
 var homelist = [
   { name: '/vue/home', route: '主页' },
   { name: '/vue/pluginList', route: '插件列表' },
-  { name: '/vue/plugin_down', route: '配置并下载' }
+  { name: '/vue/pluginDown', route: '关于个人' }
 ]
 export default {
   name: 'App',
   data: () => ({
-    login:false,
+    fade: "slide-left",
+    mode: "out-in",
+    login: false,
     name: "",
     x: 1,
     list: homelist,
-    key:'',
-    values:'',
+    key: '',
+    values: '',
     img: require("../../static/imgs/logo_top.png"),
     more: require("../../static/imgs/more.png"),
   }),
   computed: {},
   watch: {},
   methods: {
-    showLogin(){
-      this.login=!this.login;
+    left(){
+      console.log(this);
     },
-    noShow(){
-      this.login=false;
+    showLogin() {
+      this.login = !this.login;
     },
-    ensure(){
-      let data=new FormData();
-      let params={key:this.key,value:this.values};
-      Object.keys(params).forEach(i=>{
-        data.append(i,params[i]);
+    noShow() {
+      this.login = false;
+    },
+    ensure() {
+      let data = new FormData();
+      let params = { key: this.key, value: this.values };
+      Object.keys(params).forEach(i => {
+        data.append(i, params[i]);
       })
-      ajax.post('/api/post',data).then(r=>{
-        r=r.data;
-        if(r.result){
-          localStorage.setItem("token",r.token);
+      ajax.post('/api/post', data).then(r => {
+        r = r.data;
+        if (r.result) {
+          localStorage.setItem("token", r.token);
         }
       });
     },
@@ -94,30 +102,90 @@ export default {
         this.$store.commit("noShow");
       }
     }
+  },
+  beforeRouteUpdate(to, froms, next) {
+    this.fade = "slide-left";
+    if (to.meta.index > froms.meta.index) {
+      this.fade = 'slide-right';
+    }
+    next();
   }
 }
 
 </script>
 <style>
-.fade-enter {
+.move-enter {
+  opacity: 0;
+  /*animation:moveShow .3s ease-in-out;*/
+}
+@keyframes moveShow{
+	0%{
+		transform: translate3d(0,-100%,0) scale(1,1);
+	}
+	50%{
+		transform: translate3d(0,-50%,0) scale(1,.5);
+	}
+	100%{
+		transform: translate3d(0,0,0) scale(1,1);
+	}
+}
+.move-enter-active {
+  background-color: transparent;
+  animation:moveShow .3s ease-in-out;
+}
+.move-leave {
+  opacity: 1;
+    background-color: #fff;
+  transform: translate3d(0, 0, 0);
+}
+
+.move-leave-active {
+  transition: all .5s;
+  transform: translate3d(0, 100%, 0);
   opacity: 0;
 }
 
-.fade-leave {
+.slide-left-enter {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.slide-left-leave {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.slide-left-enter-active {
+  transition: all .25s ease-in-out;
   opacity: 1;
 }
 
-.fade-enter-active {
-  z-index: 100;
-  transition: opacity .1s;
-}
-
-.fade-leave-active {
+.slide-left-leave-active {
+  transition: all .5s;
+  transform: translate3d(100%, 0, 0);
   opacity: 0;
-  transition: opacity .2s;
-  z-index: -100;
 }
 
+.slide-right-leave {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+.slide-right-leave-active {
+  transition: all .25s ease-in-out;
+  transform: translate3d(-100%, 0, 0);
+  opacity: 0;
+}
+
+.slide-right-enter {
+  transform: translate3d(100%, 0, 0);
+  opacity: 0;
+}
+
+.slide-right-enter-active {
+  transition: all .5s;
+  opacity: 1;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -268,7 +336,7 @@ a {
 
 @media screen and (max-width: 800px) {
   .con-header {
-    padding:1rem 0 1rem 1rem!important;
+    padding: 1rem 0 1rem 1rem !important;
   }
 
   .con-header ul {
@@ -282,7 +350,7 @@ a {
     right: 1.8rem;
     top: 1.3rem;
     width: 48px;
-    height:28px;
+    height: 28px;
     z-index: 9999;
     color: #fff;
     background-size: cover;

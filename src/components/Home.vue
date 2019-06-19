@@ -230,13 +230,13 @@ export default {
       width: window.innerWidth,
       link_href: [{
         content: '首页',
-        route: '/home',
+        route: '/vue/home',
       }, {
         content: '插件',
-        route: '/pluginList',
+        route: '/vue/pluginList/instruction',
       }, {
-        content: '下载',
-        route: '/plugin_download',
+        content: '个人',
+        route: '/vue/pluginDown',
       }],
       url_o: require("../../static/imgs/qq.png"),
       url_t: require("../../static/imgs/alipay.png"),
@@ -249,7 +249,6 @@ export default {
   beforeMount() {},
   mounted() {
     partical.init();
-    // this.$router.replace("/pluginList/magn")
   },
 }
 

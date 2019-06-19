@@ -82,7 +82,7 @@
 <style>
 .el-magn {
   width: 400px;
-  height: 240px;
+  height: 200px;
   margin: 0 auto;
   margin-top: 1rem;
 }

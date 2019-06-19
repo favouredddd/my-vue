@@ -31,20 +31,20 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
   // inject skeleton content(DOM & CSS) into HTML
-    new SkeletonWebpackPlugin({
-      webpackConfig: require('./webpack.skeleton.conf'),
-      quiet: true,
-      minimize: true,
-      router: {
-        mode: 'history',
-        routes: [
-          {
-            path: '/home',    //对应使用路由
-            skeletonId: 'skeleton1'    // 所用骨架屏的id标识
-          },
-        ]
-      }
-    }),
+    // new SkeletonWebpackPlugin({
+    //   webpackConfig: require('./webpack.skeleton.conf'),
+    //   quiet: true,
+    //   minimize: true,
+    //   router: {
+    //     mode: 'history',
+    //     routes: [
+    //       {
+    //         path: '/home',    //对应使用路由
+    //         skeletonId: 'skeleton1'    // 所用骨架屏的id标识
+    //       },
+    //     ]
+    //   }
+    // }),
 
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
@@ -83,6 +83,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         ? 'index.html'
         : config.build.index,
       template: 'index.html',
+      favicon:"src/assets/favico.ico",
       inject: true,
       minify: {
         removeComments: true,

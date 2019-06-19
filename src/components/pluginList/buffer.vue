@@ -196,6 +196,70 @@
         <p class='explain'>这是本系统第一个缓冲插件，即加载动画，由多个长方形旋转组成。本插件可自定义配置项包括：长方形颜色、动画时间</p>
       </div>
     </div>
+     <div class='plugin-item'>
+      <div class="plugin-content el-plugin-02006">
+        <div class="plugin-buffering" style="height: 100px;position: relative;width: 100%;">
+          <buffer7 />
+        </div>
+      </div>
+      <br>
+      <div class="instruction-title-sec">HTML代码</div>
+      <br><pre class="instruction-code">
+                                    <pre><<span class="element">div</span> <span class="attr">class</span>="plugin-buffering-6" <span class="attr">x-plugin</span>="buffering" <span class="attr">dataName</span>="buffering_data"><<span class="element">/div></span></pre>
+      </pre><br>
+      <div class="instruction-title-sec">JS代码</div>
+      <br><pre class="instruction-code">
+                                    <pre><span>{</span></pre>
+      <pre><span>      name: 'buffering_6',</span>      <span class="comment">/*插件模块的模块名称*/</span></pre>
+      <pre><span>      el: '.plugin-buffering-6',</span>      <span class="comment">/*插件渲染容器*/</span></pre>
+      <pre><span>      data: {</span>      <span class="comment">/*配置参数项*/</span></pre>
+      <pre><span>            buffering_data: {</span>      <span class="comment">/*插件绑定的容器中，绑定的数据对象的名称*/</span></pre>
+      <pre><span>                  show: true</span>      <span class="comment">/*在接收到消息时，显示动画*/</span></pre>
+      <pre><span>                  color: "#FF0000",</span>      <span class="comment">/*缓冲动画颜色*/</span></pre>
+      <pre><span>                  animation_time: 1</span>      <span class="comment">/*缓冲动画时间*/</span></pre>
+      <pre><span>                  radius: 5</span>      <span class="comment">/*缓冲动画单个圆半径*/</span></pre>
+      <pre><span>            }</span></pre>
+      <pre><span>     }</span></pre>
+      <pre><span>}</span></pre>
+      </pre><br>
+      <div class='plugin-explain'>
+        <p class="instruction-title-sec">插件说明:</p>
+        <br>
+        <p class='explain'>这是本系统第一个缓冲插件，即加载动画，由多个长方形旋转组成。本插件可自定义配置项包括：长方形颜色、动画时间</p>
+      </div>
+    </div>
+        <div class='plugin-item'>
+      <div class="plugin-content el-plugin-02006">
+        <div class="plugin-buffering" style="height: 100px;position: relative;width: 100%;">
+          <buffer8 />
+        </div>
+      </div>
+      <br>
+      <div class="instruction-title-sec">HTML代码</div>
+      <br><pre class="instruction-code">
+                                    <pre><<span class="element">div</span> <span class="attr">class</span>="plugin-buffering-6" <span class="attr">x-plugin</span>="buffering" <span class="attr">dataName</span>="buffering_data"><<span class="element">/div></span></pre>
+      </pre><br>
+      <div class="instruction-title-sec">JS代码</div>
+      <br><pre class="instruction-code">
+                                    <pre><span>{</span></pre>
+      <pre><span>      name: 'buffering_6',</span>      <span class="comment">/*插件模块的模块名称*/</span></pre>
+      <pre><span>      el: '.plugin-buffering-6',</span>      <span class="comment">/*插件渲染容器*/</span></pre>
+      <pre><span>      data: {</span>      <span class="comment">/*配置参数项*/</span></pre>
+      <pre><span>            buffering_data: {</span>      <span class="comment">/*插件绑定的容器中，绑定的数据对象的名称*/</span></pre>
+      <pre><span>                  show: true</span>      <span class="comment">/*在接收到消息时，显示动画*/</span></pre>
+      <pre><span>                  color: "#FF0000",</span>      <span class="comment">/*缓冲动画颜色*/</span></pre>
+      <pre><span>                  animation_time: 1</span>      <span class="comment">/*缓冲动画时间*/</span></pre>
+      <pre><span>                  radius: 5</span>      <span class="comment">/*缓冲动画单个圆半径*/</span></pre>
+      <pre><span>            }</span></pre>
+      <pre><span>     }</span></pre>
+      <pre><span>}</span></pre>
+      </pre><br>
+      <div class='plugin-explain'>
+        <p class="instruction-title-sec">插件说明:</p>
+        <br>
+        <p class='explain'>这是本系统第一个缓冲插件，即加载动画，由多个长方形旋转组成。本插件可自定义配置项包括：长方形颜色、动画时间</p>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -205,6 +269,8 @@ import buffer3 from '@/components/pluginlist/buffer/buffer3.vue'
 import buffer4 from '@/components/pluginlist/buffer/buffer4.vue'
 import buffer5 from '@/components/pluginlist/buffer/buffer5.vue'
 import buffer6 from '@/components/pluginlist/buffer/buffer6.vue'
+import buffer7 from '@/components/pluginlist/buffer/partical.vue'
+import buffer8 from '@/components/pluginlist/buffer/buffer7.vue'
 export default {
   name: "buffer",
   components: {
@@ -213,14 +279,16 @@ export default {
     buffer3,
     buffer4,
     buffer5,
-    buffer6
+    buffer6,
+    buffer7,
+    buffer8
   },
   data() {
     let width = this.$store.state.width;;
     return { name: "轮播图插件", width: width }
   },
   mounted() {
-
+    console.log(this)
   }
 }
 

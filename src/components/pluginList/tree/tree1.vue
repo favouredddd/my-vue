@@ -205,6 +205,8 @@ export default {
   background-color: #1890ff;
   width: 14px;
   height: 14px;
+  top:5px;
+  left: 23px;
   /*transform: rotate(-45deg);*/
 }
 
@@ -230,6 +232,7 @@ export default {
 
 .el-tree .content {
   width: 200px;
+  height: auto!important;
 }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="root">
-      <router-view></router-view>
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -10,17 +10,38 @@ export default {
 
 </script>
 <style>
+input{
+  -webkit-appearance: none;
+}
+.slide-left-enter-active {
+  transition: all .3s ease;
+}
+.slide-left-leave-active {
+  transition: all .8s ease  ;
+}
+.slide-left-enter, 
+{
+  transform: translateX(100%);
+  opacity: 0;
+}
+.slide-left-leave-to{
+ transform: translateX(-100%);
+  opacity: 0;
+}
 
-.fade-enter {
-  opacity:0;
+.slide-right-enter-active {
+  transition: all .3s ease;
 }
-.fade-leave{
-  opacity:1;
+.slide-right-leave-active {
+  transition: all .8s ease  ;
 }
-.fade-enter-active{
-  transition:opacity .5s;
+.slide-right-enter{
+  transform: translateX(-100%);
+  opacity: 0;
 }
-.fade-leave-active{
-  opacity:0;
-  transition:opacity .5s;
-}
+.slide-right-leave-to{
+    transform: translateX(100%);
+    opacity: 0;
+}</style>
+
+</style>

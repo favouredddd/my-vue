@@ -1,8 +1,9 @@
 <template>
   <div class="el-photo">
     <div class="plugin">
-      <div class='content' ref="wrap">
-        <div class='show' :style="getStyle">
+     <moveStart  :left="goLeft" :right="goRight"> 
+      <div class='content' slot="hhhh">
+        <div class='show' :style="getStyle" @transitionend="transitionend">
           <img class='imgs' v-for="(i,index) in imgs" :src="i.img" :style="getWidth"/>
          </div>
           <div class='span'>
@@ -15,26 +16,29 @@
             <div class="img-content"></div>
           </div>
         </div>
+      </moveStart>
       </div>
     </div>
 </template>
 <script>
-let swipe = require("../../util/swipe.js").default;
-let imgs = [
-  { img: require("../../../assets/banner001.jpg"), check: false },
-  { img: require("../../../assets/banner002.jpg"), check: false },
-  { img: require("../../../assets/banner003.jpg"), check: false },
-  { img: require("../../../assets/banner004.jpg"), check: false },
-  { img: require("../../../assets/banner001.jpg"), check: false }
-];
+import moveStart from '@/components/util/swipe.vue'
+import src from '@/components/util/absolute.js'
+let imgs =src.map(i=>{
+  return {img:i}
+});
+imgs.push(imgs[0]);
 export default {
   name: "carousel1",
   data() {
     return { imgs: imgs, left: 0, translate: 0, index: 1, flag: true }
   },
+  components:{
+    moveStart
+  },
   computed: {
     width(){
-      return this.$store.state.width
+      let me=this;
+      return me.$store.state.width
     },
     getWidth() {
       return { 'width': this.width + 'px' };
@@ -76,7 +80,9 @@ export default {
     },
     create() {
       let me = this;
+      me.flag=false;
       me.$nextTick(()=>{
+        me.left= -1 * me.index * me.$store.state.width;
         me.addspan();
         me.updata();
       })
@@ -104,6 +110,7 @@ export default {
     },
     goLeft(){
       let me=this;
+      // console.log(me.flag)
         if (!me.flag)
           return
         me.flag = false;
@@ -123,23 +130,15 @@ export default {
         me.moveright();
         me.addspan();
         me.updata();
+    },
+    transitionend(){
+      let me=this;
+      me.flag=true;
     }
   },
   mounted(){
     let me = this;
     me.create();
-    me.left= -1 * me.index * me.width;
-    new swipe(me.$refs.wrap, {
-      left: () => {
-       me.goLeft();
-      },
-      right:() => {
-        me.goRight();
-      }
-    });
-    me.$refs.wrap.addEventListener("transitionend", function() {
-      me.flag = true;
-    }, false);
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         clearInterval(me.timer);

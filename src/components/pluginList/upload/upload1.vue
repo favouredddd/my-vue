@@ -213,7 +213,7 @@ export default {
         },
         type: 'post',
         params: me.imgs,
-        url: 'https://nodom.store/api/upload',
+        url: 'https://nodom.store/api/getload',
         callback() {
           alert("success");
         }

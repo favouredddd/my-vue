@@ -1,0 +1,1 @@
+DD.createModule({name:1,templateUrl:"./test.html"});

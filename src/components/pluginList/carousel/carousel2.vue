@@ -1,29 +1,30 @@
 <template>
   <div class="carous_ct" ref="wrap">
-    <div class='plugin'>
-      <figure class='carous' :style="getContent">
-        <img :src="item" alt="图片" class='img-trans' v-for="(item,index) in imgs" :style="getImgs(index)">
+    <moveStart :left="goLeft" :right="goRight" style="height:100%">
+      <div class='plugin' slot="hhhh">
+        <figure class='carous' :style="getContent" @transitionend="transitionend">
+          <img :src="item" alt="图片" class='img-trans' v-for="(item,index) in imgs" :style="getImgs(index)">
           </figure>
-        <div class="spancont">
-          <div class="span">
-            <span class='inline-span' v-for="(item,index) in imgs" :style="actives(index)"></span>
+          <div class="spancont">
+            <div class="span">
+              <span class='inline-span' v-for="(item,index) in imgs" :style="actives(index)"></span>
+            </div>
           </div>
-        </div>
-    </div>
+      </div>
+    </moveStart>
   </div>
 </template>
 <script>
-var swipe = require("../../util/swipe.js").default;
+import moveStart from '@/components/util/swipe.vue'
+import src from '@/components/util/absolute.js'
+let imgs =src.map(i=>{
+  return i
+})
 export default {
   name: "carousel2",
   data() {
     return {
-      imgs: [
-        require("../../../assets/banner001.jpg"),
-        require("../../../assets/banner002.jpg"),
-        require("../../../assets/banner003.jpg"),
-        require("../../../assets/banner004.jpg")
-      ],
+      imgs: imgs,
       z: 0,
       index: 0,
       flag: false
@@ -41,43 +42,49 @@ export default {
       return -1 * imgw / (2 * Math.tan(rad / 2));
     },
     goLeft() {
-      let me=this;
-      if (!this.flag)
+      let me = this;
+      if (!me.flag)
         return;
       clearInterval(me.timer);
-      this.index--;
-      this.flag = false;
+      me.index--;
+      me.flag = false;
       me.setTimer()
     },
     goRight() {
-       let me=this;
-      if (!this.flag)
+      let me = this;
+      if (!me.flag)
         return;
       clearInterval(me.timer);
-      this.index++;
-      this.flag = false;
+      me.index++;
+      me.flag = false;
       me.setTimer()
     },
     setTimer() {
       let me = this;
-      this.timer = setInterval(() => {
+      me.timer = setInterval(() => {
         me.index++;
       }, 3000);
+    },
+    transitionend() {
+      let me = this;
+      me.flag = true;
     }
-
   },
   created() {
     var me = this;
   },
+  components: {
+    moveStart
+  },
   computed: {
     actives(ind) {
-      let me=this;
+      let me = this;
       return function(ind) {
-        var index=(me.imgs.length-me.index)%me.imgs.length;
-        if(index<0)
-          index+=me.imgs.length
-        if (ind===index) {
-          return { "background": "rgba(0,255,0)" }
+        var index = (me.imgs.length - me.index) % me.imgs.length;
+        if (index < 0)
+          index += me.imgs.length
+        if (ind === index) {
+          return { "backgroundColor": "rgba(0,255,0,1)" }
         }
         return { "background": "#fff" }
       }
@@ -99,22 +106,18 @@ export default {
   },
   mounted() {
     let me = this;
-    setTimeout(()=>{
-    me.z = me.getheight();
-    new swipe(me.$refs.wrap, { right: me.goLeft.bind(me), left: me.goRight.bind(me) });
-    me.$refs.wrap.addEventListener("transitionend", function() {
-      me.flag = true;
-    }, false);
-    this.setTimer()
-     document.addEventListener("visibilitychange",()=>{
-      if(document.hidden){
-        clearInterval(me.timer);
-      }else{
-        me.setTimer();
-      }
-    });
-  },0);
-}
+    setTimeout(() => {
+      me.z = me.getheight();
+      this.setTimer()
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          clearInterval(me.timer);
+        } else {
+          me.setTimer();
+        }
+      });
+    }, 0);
+  }
 }
 
 </script>
@@ -159,7 +162,7 @@ export default {
 }
 
 .spancont .span {
-  width: 100px;
+  width: 120px;
   margin: 0 auto;
 }
 

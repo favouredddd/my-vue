@@ -7,7 +7,7 @@
           <div class="el-plugin-input">
             <div class="inputAuto">
               <div class="wrap">
-                <input type="text" class="input" spellcheck="false" @input="add" v-model="value" @focus="focus" @blur="blur">
+                <input type="text" class="input" spellcheck="false" @input="add" v-model="value" @focus="focus" @blur="blur" ref="input">
               </div>
               <div class="infor" :class="{'show':show}" :style="getHeight">
                 <li v-for="(i,index) in results" :class="{'check':i.check}" @click="check(index,i)">{{i.txt}}</li>
@@ -116,6 +116,7 @@ export default {
     }
   },
   mounted() {
+     // this.$refs.input.focus();
     window.addEventListener("keydown", (e) => { this.keyDown(e.keyCode) }, false);
   }
 }
@@ -142,6 +143,7 @@ export default {
 }
 
 .inputAuto .input {
+  user-select: all!important;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   font-size: 12px;
   -webkit-appearance: none;

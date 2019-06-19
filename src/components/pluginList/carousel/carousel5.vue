@@ -1,16 +1,23 @@
 <template>
   <div class="el-carousel" ref="carousel">
-    <div class="wrap" ref="wrap" :style="{left:d+'px'}">
-      <img :src="src1">
-    </div>
-      <div class="spanWrap" ref="span">
-        <span v-for="(i,key) in src" class="span" @click="turn" :index="key"></span>
+    <moveStart :left="goRight" :right="goLeft" style="height:100%" @transitionend="transitionend">
+      <div slot="hhhh" style="height:100%;width:100%">
+        <div class="wrap" ref="wrap" :style="{left:d+'px'}">
+          <img :src="src1">
       </div>
-    </div>
+          <div class="spanWrap" ref="span">
+            <span v-for="(i,key) in src" class="span" @click="turn" :index="key"></span>
+          </div>
+        </div>
+    </moveStart>
+  </div>
 </template>
 <script>
-var swipe = require("../../util/swipe.js").default;
-var src = [require("../../../assets/banner001.jpg"), require("../../../assets/banner002.jpg"), require("../../../assets/banner003.jpg"), require("../../../assets/banner004.jpg")];
+import moveStart from '@/components/util/swipe.vue'
+import srcs from '@/components/util/absolute.js'
+let src =srcs.map(i=>{
+  return i
+})
 var img = [];
 var getImage = (src, index) => {
   var imgs = new Image();
@@ -30,6 +37,10 @@ var promises = () => {
 export default {
   name: "carousel5",
   methods: {
+    transitionend(){
+      let me=this;
+      me.flag=true;
+    },
     turn(e) {
       var me = this;
       var key = parseInt(e.target.getAttribute("index"));
@@ -54,8 +65,8 @@ export default {
         me.dom = me.$refs.wrap;
         me.$nextTick(() => {
           //初始化
-           //添加手势
-      new swipe(me.$refs.wrap, { right: me.goLeft.bind(me), left: me.goRight.bind(me) })
+          //添加手势
+          // new swipe(me.$refs.wrap, { right: me.goLeft.bind(me), left: me.goRight.bind(me) })
           me.img = me.dom.querySelector("img");
           me.tem = img[1];
           me.span = [...me.$refs.span.querySelectorAll("span")]
@@ -157,6 +168,9 @@ export default {
       me.setTime();
     }
   },
+  components:{
+    moveStart
+  },
   data() {
     var me = this;
     return {
@@ -178,10 +192,10 @@ export default {
   mounted() {
     var me = this;
     setTimeout(() => {
-    let width = me.$store.state.width;
-    let speed = width / 30;
-    me.width=width;
-    me.speed=speed;
+      let width = me.$store.state.width;
+      let speed = width / 30;
+      me.width = width;
+      me.speed = speed;
       me.create();
     }, 0)
   }
@@ -213,7 +227,7 @@ export default {
 .el-carousel .spanWrap {
   z-index: 999;
   position: absolute;
-  width: 10rem;
+  width: 100px;
   height: 1rem;
   font-size: 0;
   display: flex;
@@ -225,16 +239,16 @@ export default {
 
 .el-carousel .spanWrap .span {
   transition: all 1s;
-  width: 1rem;
-  height: 1rem;
+  width: 13px;
+  height: 13px;
   display: inline-block;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0);
-  opacity: .2;
+  background-color: #fff;
+  opacity: 1;
 }
 
 .el-carousel .spanWrap .check {
-  background-color: red !important;
+  background-color: rgb(0,255,0)!important;
   opacity: 1 !important;
 }
 

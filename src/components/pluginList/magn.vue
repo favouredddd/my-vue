@@ -36,7 +36,7 @@
     </div>
     <div class='plugin-item'>
       <div class="plugin-content el-plugin-08002" style="display: block!important">
-                 <magn1 />
+                 <magn2 />
       </div>
       <br>
       <div class="instruction-title-sec">HTML代码</div>
@@ -70,10 +70,12 @@
 </template>
 <script>
   import magn1 from '@/components/pluginlist/magn/magn1.vue'
+    import magn2 from '@/components/pluginlist/magn/magn2.vue'
 export default {
   name: "magn",
   components:{
     magn1,
+    magn2
   },
   data() {
     return {
@@ -83,6 +85,9 @@ export default {
   methods: {
   },
   computed: {
+  },
+  mounted(){
+    console.log(this.$route);
   }
 }
 

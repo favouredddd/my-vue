@@ -1,5 +1,7 @@
 <template>
   <div class="el-carousel" ref="wrap">
+        <moveStart :left="goRight" :right="goLeft" style="height:100%">
+         <div slot="hhhh" style="height:100%;width:100%">
     <div class="wrap" :style="getMove" ref="content" @transitionend="transitionEnd">
       <div class="myCarousel" ref="dom">
         <img :src="src1" >
@@ -9,10 +11,15 @@
         <span v-for="(i,index) in src" class="span" :index="index" @click="turn"></span>
       </div>
     </div>
+    </moveStart>
+    </div>
 </template>
 <script>
-var swipe = require("../../util/swipe.js").default;
-var src = [require("../../../assets/banner001.jpg"), require("../../../assets/banner002.jpg"), require("../../../assets/banner003.jpg"), require("../../../assets/banner004.jpg")];
+import moveStart from '@/components/util/swipe.vue'
+import srcs from '@/components/util/absolute.js'
+let src =srcs.map(i=>{
+  return i
+})
 var img = [];
 var getImage = (src, index) => {
   var imgs = new Image();
@@ -42,7 +49,7 @@ export default {
         return;
       me.flag = false;
       clearInterval(me.timer);
-      me.timer=null;
+      me.timer = null;
       if (key > me.index) {
         me.move(true, key - 1);
       } else {
@@ -56,14 +63,16 @@ export default {
         me.dom = me.$refs.dom;
         //初始化
         //添加手势
-        new swipe(me.$refs.wrap, { right: me.goLeft.bind(me), left: me.goRight.bind(me) })
         me.img = me.dom.querySelector("img");
         me.tem = img[1];
         me.span = [...me.$refs.span.querySelectorAll(".span")]
         me.span[0].classList.add("check");
         me.setTime();
         window.addEventListener("visibilitychange", () => {
-          if (document.hidden) { clearInterval(me.timer);me.timer=null } else {
+          if (document.hidden) {
+            clearInterval(me.timer);
+            me.timer = null
+          } else {
             me.setTime();
           }
         }, false);
@@ -99,6 +108,8 @@ export default {
     },
     moveLeft() {
       var me = this;
+      if (!me.$refs.content)
+        return
       me.$refs.content.classList.add("transitionss");
       me.flag = false;
       me.d = -1 * me.width;
@@ -106,6 +117,8 @@ export default {
     },
     moveRight() {
       var me = this;
+      if (!me.$refs.content)
+        return
       me.$refs.content.classList.add("transitionss");
       me.flag = false;
       me.d = 0;
@@ -161,6 +174,9 @@ export default {
       }, 50)
     }
   },
+  components:{
+    moveStart
+  },
   data() {
     var me = this;
     return {
@@ -188,7 +204,7 @@ export default {
   mounted() {
     var me = this;
     setTimeout(() => {
-      let width=parseInt(window.getComputedStyle(document.querySelector(".plugin-content")).width);
+      let width = parseInt(window.getComputedStyle(document.querySelector(".plugin-content")).width);
       me.width = width;
       me.create();
     }, 0)
@@ -225,7 +241,7 @@ export default {
 .el-carousel .spanWrap {
   z-index: 999;
   position: absolute;
-  width: 10rem;
+  width: 100px;
   height: 1rem;
   font-size: 0;
   display: flex;
@@ -247,16 +263,16 @@ export default {
 
 .el-carousel .spanWrap .span {
   transition: all 1s;
-  width: 1rem;
-  height: 1rem;
+  width: 13px;
+  height: 13px;
   display: inline-block;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0);
-  opacity: .2;
+  background-color: #fff;
+  opacity: 1;
 }
 
 .el-carousel .spanWrap .check {
-  background-color: red !important;
+  background-color: rgb(0,255,0) !important;
   opacity: 1 !important;
 }
 

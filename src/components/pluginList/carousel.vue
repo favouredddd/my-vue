@@ -236,6 +236,48 @@
           本插件可自定义配置项包括：轮播颜色、初始颜色、圆圈显示还是方块显示、提示宽度、提示高度、提示颜色、轮播时间、轮播方向（方向上、方向下）。</p>
       </div>
     </div>
+      <div class='plugin-item'>
+      <div class="plugin-content el-plugin-03005">
+        <div class="el-plugin" style="width:100%">
+          <div class="container">
+            <carousel7 :Wrapwidth="width"/>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="instruction-title-sec">HTML代码</div>
+      <br><pre class="instruction-code">
+                                      <pre><<span class="element">div</span> <span class="attr">class</span>="plugin-carousel-4" <span class="attr">x-plugin</span>="carousel" <span class="attr">dataName</span>="carousel_data"><<span class="element">/div></span></pre>
+      </pre><br>
+      <div class="instruction-title-sec">JS代码</div>
+      <br>
+      <pre class="instruction-code">
+                                  <pre><span>{</span></pre>
+      <pre><span>      name: 'carousel_4',</span>      <span class="comment">/*插件模块的模块名称*/</span></pre>
+      <pre><span>      el: '.plugin-carousel-4',</span>      <span class="comment">/*插件渲染容器*/</span></pre>
+      <pre><span>      data: {</span>      <span class="comment">/*配置参数项*/</span></pre>
+      <pre><span>            carousel_data: {</span>      <span class="comment">/*插件绑定的容器中，绑定的数据对象的名称*/</span></pre>
+      <pre><span>                  width: 10,</span>      <span class="comment">/*轮播图提示位置大小*/</span></pre>
+      <pre><span>                  check_color: "#ffff00",</span>      <span class="comment">/*轮播图提示当前位置显示颜色*/</span></pre>
+      <pre><span>                  translate: false,</span>      <span class="comment">/*是否可点击*/</span></pre>
+      <pre><span>                  imgs: [{</span>      <span class="comment">/*轮播图图片数组*/</span></pre>
+      <pre><span>                        img_item:[{</span>      <span class="comment">/*轮播图有几张图片就有几个img_item*/</span></pre>
+      <pre><span>                              url: '*****'</span>      <span class="comment">/*一张图片分为及部分，就有几个{url,'*****'}*/</span></pre>
+      <pre><span>                        }]</span></pre>
+      <pre><span>                  }],</span></pre>
+      <pre><span>                  up: true,</span>      <span class="comment">/*轮播图向上滑动还是向下滑动*/</span></pre>
+      <pre><span>                  is_circle: true</span>      <span class="comment">/*轮播图提示当前位置是否为圆圈*/</span></pre>
+      <pre><span>            }</span></pre>
+      <pre><span>     }</span></pre>
+      <pre><span>}</span></pre>
+      </pre>
+      <br>
+      <div class='plugin-explain'>
+        <p class="instruction-title-sec">插件说明:</p>
+        <br>
+        <p class='explain'>这是vue的transition-group的轮播图</p>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -245,6 +287,8 @@ import carousel3 from '@/components/pluginlist/carousel/carousel3.vue'
 import carousel4 from '@/components/pluginlist/carousel/carousel4.vue'
 import carousel1 from '@/components/pluginlist/carousel/carousel1.vue'
 import carousel6 from '@/components/pluginlist/carousel/carousel6.vue'
+import carousel7 from '@/components/pluginlist/carousel/vuecarousel.vue'
+console.log(carousel1);
 export default {
   name: "carousel",
   components: {
@@ -253,7 +297,8 @@ export default {
     carousel3,
     carousel4,
     carousel1,
-        carousel6
+    carousel6,
+    carousel7
   },
   data(){
     let width=this.$store.state.width;;

@@ -1,6 +1,8 @@
 <template>
-  <div class='content' ref="wrap">
-    <div class="img-photo"  v-for="(i,ind) in imgs" :style="getContent(ind)">
+  <div class='contents' ref="wrap">
+     <moveStart  :left="goLeft" :right="goRight" style="height:100%">
+      <div slot="hhhh" style="height:100%;width:100%">
+    <div class="img-photo"  v-for="(i,ind) in imgs" :style="getContent(ind)" @transitionend="transitionend">
       <div v-for="(item,index) in i" :style="getImgs(ind,index)" class='img'></div>
     </div>
     <div style="clear:both"></div>
@@ -10,45 +12,30 @@
       </div>
     </div>
   </div>
+  </moveStart>
+  </div>
 </template>
 <script>
-var swipe = require("../../util/swipe.js").default;
+import moveStart from '@/components/util/swipe.vue'
+import src from '@/components/util/absolute.js'
+let imgs =src.map(i=>{
+  return i
+})
 export default {
       props:["Wrapwidth"],
   name: "carousel4",
   data() {
     return {
       imgs: [
-        [
-        require("../../../assets/4.jpg"),
-        require("../../../assets/8.jpg"),
-        require("../../../assets/12.jpg"),
-        require("../../../assets/16.jpg")
-        ],
-         [
-         require("../../../assets/3.jpg"),
-        require("../../../assets/7.jpg"),
-        require("../../../assets/11.jpg"),
-        require("../../../assets/15.jpg")
-        ],
-         [
-        require("../../../assets/2.jpg"),
-        require("../../../assets/6.jpg"),
-        require("../../../assets/10.jpg"),
-        require("../../../assets/14.jpg")
-        ],
-         [
-        require("../../../assets/1.jpg"),
-        require("../../../assets/5.jpg"),
-        require("../../../assets/9.jpg"),
-        require("../../../assets/13.jpg")
-        ],
-
+       imgs,imgs,imgs,imgs
       ],
       z: 0,
       index: 0,
       flag: false
     };
+  },
+  components:{
+    moveStart
   },
   beforeDestroy() {
     var me = this;
@@ -84,6 +71,10 @@ export default {
       this.timer = setInterval(() => {
         me.index++;
       }, 3000);
+    },
+    transitionend(){
+      let me=this;
+       me.flag = true;
     }
 
   },
@@ -99,7 +90,7 @@ export default {
         if (index < 0)
           index += me.imgs.length
         if (ind === index) {
-          return { "background": "rgba(0,255,0)" }
+          return { "background": "rgba(0,255,0,1)" }
         }
         return { "background": "#fff" }
       }
@@ -116,8 +107,9 @@ export default {
         let z = this.z;
         let tem =360 * index / (this.imgs.length)
         return {
+          'background-position':''+-100*ind+'% 0%',
           'background-image': 'url('+this.imgs[ind][index]+')',
-          'background-size': '100% 100%' ,
+          'background-size': '400% 100%' ,
           'transform': 'rotateX('+tem+'deg) translateZ('+z+'px)'
         }
       }
@@ -125,10 +117,10 @@ export default {
   },
   mounted() {
     let me = this;
-    new swipe(me.$refs.wrap, { right: me.goLeft.bind(me), left: me.goRight.bind(me) });
-    me.$refs.wrap.addEventListener("transitionend", function() {
-      me.flag = true;
-    }, false);
+    // new swipe(me.$refs.wrap, { right: me.goLeft.bind(me), left: me.goRight.bind(me) });
+    // me.$refs.wrap.addEventListener("transitionend", function() {
+    //   me.flag = true;
+    // }, false);
     this.setTimer();
     document.addEventListener("visibilitychange",()=>{
       if(document.hidden){
@@ -142,7 +134,7 @@ export default {
 
 </script>
 <style>
-.content {
+.contents {
     margin: 0 auto;
     width: 100%;
     height: 7.78rem;
@@ -150,7 +142,7 @@ export default {
     position: relative;
 }
 
-.content .img-photo {
+.contents .img-photo {
   float: left;
   transition: all 1.5s;
   transform-style: preserve-3d;
@@ -158,31 +150,31 @@ export default {
   height: 100%;
 }
 
-.content .img-photo .img {
+.contents .img-photo .img {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-.content .img-photo .index {
+.contents .img-photo .index {
   z-index: 1000;
 }
 
-.content .span {
+.contents .span {
   position: absolute;
   width: 100%;
   height: 21px;
   bottom: 20px;
 }
 
-.content .span .span-cont {
+.contents .span .span-cont {
   height: 100%;
   width: 100px;
   margin: 0 auto;
   overflow: hidden;
 }
 
-.content .span .span-cont span {
+.contents .span .span-cont span {
   display: inline-block;
   background-color: #f8f8f8;
   height: 13px;
@@ -191,7 +183,7 @@ export default {
   border-radius: 50%;
 }
 
-.content .span .span-cont .is_check {
+.contents .span .span-cont .is_check {
   background-color: #ff6800;
 }
 

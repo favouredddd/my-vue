@@ -17,7 +17,7 @@
     "axios": "^0.18.0",
     "babel-plugin-transform-decorators": "^6.24.1",
     "babel-polyfill": "^6.26.0",
-    "log4js": "^3.0.6",
+    "log4js": "^6.4.0",
     "redis": "^2.8.0",
     "reflect-metadata": "^0.1.13",
     "vue": "^2.5.2",
